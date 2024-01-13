@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <Provider store={store}>
             <TonConnectUIProvider
-                manifestUrl="https://campos-tonapp-21787ac31b01.herokuapp.com/tonconnect-manifest.json"
+                manifestUrl="https://ton-f719oz8h7-daniels-projects-820f5420.vercel.app/tonconnect-manifest.json"
                 uiPreferences={{ theme: THEME.DARK }}
                 actionsConfiguration={{
                     twaReturnUrl: "https://t.me/campos_tonbot",
