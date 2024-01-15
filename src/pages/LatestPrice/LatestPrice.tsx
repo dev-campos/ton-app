@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { selectPairs } from "../../features/pairsSlice";
 import { useGetLatestPriceQuery } from "../../services/owlsApiSlice";
-import Loader from "../../components/Loader/Loader";
 
 export const LatestPrice = () => {
     const pairs = useAppSelector(selectPairs);
