@@ -1,18 +1,42 @@
 import styles from "./Header.module.scss";
-import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
+import { useEffect } from "react";
+import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
 import logo from "../../../assets/logo.svg";
+import { useGetAddressBalanceQuery } from "../../../services/tonApiSlice";
+import { skipToken } from "@reduxjs/toolkit/query/react";
+import { formatTons } from "../../../utils/nanotons";
 
 export const Header = () => {
-    const wallet = useTonWallet();
+    const address = useTonAddress();
 
-    if (wallet) {
-        console.log(wallet.account.address.split(":")[1]);
-    }
+    const { data: currentBalance, refetch: refetchCurrentBalance } =
+        useGetAddressBalanceQuery(
+            address
+                ? {
+                      address: address,
+                  }
+                : skipToken,
+            {
+                pollingInterval: 5000,
+            }
+        );
+
+    useEffect(() => {
+        if (address) {
+            refetchCurrentBalance();
+        }
+    }, [address, refetchCurrentBalance]);
 
     return (
         <header className={styles.header}>
             <img className={styles.logo} src={logo} alt="Owls Logo" />
-            <TonConnectButton className={styles.ton} />
+            {currentBalance && currentBalance.result ? (
+                <div className={styles.ton}>
+                    {formatTons(currentBalance.result).toFormat()} TON
+                </div>
+            ) : (
+                <TonConnectButton className={styles.ton} />
+            )}
         </header>
     );
 };

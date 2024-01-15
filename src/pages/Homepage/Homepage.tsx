@@ -4,7 +4,6 @@ import { selectPairs } from "../../features/pairsSlice";
 
 export const Homepage = () => {
     const pairs = useAppSelector(selectPairs);
-    console.log(pairs);
 
     return (
         <div>

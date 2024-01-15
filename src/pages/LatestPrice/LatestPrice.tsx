@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { selectPairs } from "../../features/pairsSlice";
 import { useGetLatestPriceQuery } from "../../services/owlsApiSlice";
+import { skipToken } from "@reduxjs/toolkit/query/react";
 
 export const LatestPrice = () => {
     const pairs = useAppSelector(selectPairs);
@@ -14,7 +15,7 @@ export const LatestPrice = () => {
                       baseAsset: pairs.activePair.baseAsset,
                       quoteAsset: pairs.activePair.quotaAsset,
                   }
-                : !pairs.activePair,
+                : skipToken,
             {
                 pollingInterval: 5000,
             }
