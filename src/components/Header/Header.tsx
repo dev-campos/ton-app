@@ -1,5 +1,5 @@
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
-import "./header.scss";
+import styles from "./Header.module.scss";
 
 export const Header = () => {
     const wallet = useTonWallet();
@@ -9,7 +9,7 @@ export const Header = () => {
     }
 
     return (
-        <header>
+        <header className={styles.header}>
             <TonConnectButton />
         </header>
     );
