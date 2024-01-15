@@ -8,8 +8,8 @@ export const Homepage = () => {
 
     return (
         <div>
+            <Link to="/LatestPrice">LatestPrice</Link>
             <p>{pairs.activePair && pairs.activePair.name}</p>
-            <Link to="/Testroute">Testroute</Link>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import { Homepage } from "./pages/Homepage/Homepage";
-import { Testroute } from "./pages/Testroute/Testroute";
+import { LatestPrice } from "./pages/LatestPrice/LatestPrice";
 
 const Routes = createBrowserRouter([
     {
@@ -13,8 +13,8 @@ const Routes = createBrowserRouter([
                 element: <Homepage />,
             },
             {
-                path: "/testRoute",
-                element: <Testroute />,
+                path: "/LatestPrice",
+                element: <LatestPrice />,
             },
         ],
     },

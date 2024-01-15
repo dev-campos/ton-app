@@ -1,6 +1,6 @@
 import styles from "./App.module.scss";
 import { useEffect } from "react";
-import { Header } from "./components/Header/Header";
+import { Header } from "./components/Layout/Header/Header";
 import { useAppDispatch } from "./hooks/reduxHooks";
 
 import { Outlet } from "react-router-dom";
@@ -19,6 +19,7 @@ function App() {
             dispatch(changePairs(pairsData.data));
         }
     }, [dispatch, pairsData]);
+
     return (
         <div className={styles.app}>
             <Header />

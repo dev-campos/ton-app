@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+
+    .logo {
+      margin-left: 10px;
+      height: calc(100% - 20px);
+    }
+
+    .ton {
+      margin-right: 10px;  
+    }
+
+}

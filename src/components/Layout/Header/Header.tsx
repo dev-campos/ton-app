@@ -1,5 +1,6 @@
-import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import styles from "./Header.module.scss";
+import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
+import logo from "../../../assets/logo.svg";
 
 export const Header = () => {
     const wallet = useTonWallet();
@@ -10,7 +11,8 @@ export const Header = () => {
 
     return (
         <header className={styles.header}>
-            <TonConnectButton />
+            <img className={styles.logo} src={logo} alt="Owls Logo" />
+            <TonConnectButton className={styles.ton} />
         </header>
     );
 };
