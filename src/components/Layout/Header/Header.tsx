@@ -35,24 +35,24 @@ export const Header = () => {
                 <div className={styles.ton}>
                     <TonConnectButton />
                     <div className={styles.balance}>
-                        {formatTons(currentBalance.result).toFormat()}{" "}
                         <img
                             className={styles.tonLogo}
                             src={tonLogo}
                             alt="ton logo"
-                        />
+                        />{" "}
+                        {formatTons(currentBalance.result).toFormat(2)}
                     </div>
                 </div>
             ) : (
                 <div className={styles.ton}>
                     <TonConnectButton />
                     <div className={styles.balance}>
-                        -{" "}
                         <img
                             className={styles.tonLogo}
                             src={tonLogo}
                             alt="ton logo"
-                        />
+                        />{" "}
+                        -
                     </div>
                 </div>
             )}
