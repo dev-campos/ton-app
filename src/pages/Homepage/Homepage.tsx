@@ -6,13 +6,14 @@ import { useGetLatestPriceQuery } from "../../services/owlsApiSlice";
 import { skipToken } from "@reduxjs/toolkit/query/react";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
+import WebApp from "@twa-dev/sdk";
 
 export const Homepage = () => {
     const pairs = useAppSelector(selectPairs);
 
-    const handleChartClick = () => alert("Chart clicked");
-    const handleUpClick = () => alert("Up clicked");
-    const handleDownClick = () => alert("Down clicked");
+    const handleChartClick = () => WebApp.showAlert("Chart clicked");
+    const handleUpClick = () => WebApp.showAlert("Up clicked");
+    const handleDownClick = () => WebApp.showAlert("Down clicked");
 
     const { data: currentPrice, refetch: refetchCurrentPrice } =
         useGetLatestPriceQuery(
