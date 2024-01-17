@@ -38,40 +38,40 @@ export const Homepage = () => {
     return (
         <div className={styles.homepage}>
             <div className={styles.selectionCharts}>
-                <div className={styles.selection}>
-                    Market {pairs.activePair && pairs.activePair.name}
+                <div>Market {pairs.activePair && pairs.activePair.name}</div>
+                <div>
+                    <Button
+                        label={"Chart"}
+                        onClick={handleChartClick}
+                        buttonType={"chartButton"}
+                    />
                 </div>
-                <Button
-                    label={"Chart"}
-                    onClick={handleChartClick}
-                    buttonType={"chartButton"}
-                />
             </div>
             <Card>
                 <div className={styles.liveMarket}>
                     <h4>Market Live</h4>
-                    <div>
-                        {currentPrice ? (
-                            <p>Latest Price: {currentPrice.data.price}</p>
-                        ) : (
-                            <p>Loading latest price...</p>
-                        )}
-                    </div>
+                    {currentPrice ? (
+                        <div>Latest Price: {currentPrice.data.price}</div>
+                    ) : (
+                        <div>Loading latest price...</div>
+                    )}
                 </div>
             </Card>
             <Card>
                 <div>
                     <h4>Take Your Side</h4>
-                    <Button
-                        label="Enter UP"
-                        buttonType="upButton"
-                        onClick={handleUpClick}
-                    />
-                    <Button
-                        label="Enter DOWN"
-                        buttonType="downButton"
-                        onClick={handleDownClick}
-                    />
+                    <div className={styles.buttons}>
+                        <Button
+                            label="Enter UP"
+                            buttonType="upButton"
+                            onClick={handleUpClick}
+                        />
+                        <Button
+                            label="Enter DOWN"
+                            buttonType="downButton"
+                            onClick={handleDownClick}
+                        />
+                    </div>
                 </div>
             </Card>
             <Card>
