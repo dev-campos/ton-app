@@ -13,10 +13,55 @@
         margin-top: 0;
     }
 
-    .buttons {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .live {
+        .last {
+            margin-bottom: 20px;
+
+            h5 {
+                margin: 0;
+                color: #D4AF37;
+                font-size: 1rem;
+            }
+
+            .price {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                max-width: 230px;
+            }
+        
+            .positive, .negative {
+                padding: 5px 10px;
+                border-radius: 5px;
+                color: white;
+            }
+        
+            .positive {
+                background-color: #4CAF50;
+            }
+              
+            .negative {
+                background-color: #F44336;
+            }
+        }
+    
+        .locked {
+            span {
+                color: #D4AF37;
+            }
+        }
     }
 
+    .side {
+        .form {
+            max-width: 350px;
+            margin: auto;
+
+            .buttons {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+    }
 }

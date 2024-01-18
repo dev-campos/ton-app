@@ -7,6 +7,7 @@ import { skipToken } from "@reduxjs/toolkit/query/react";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import WebApp from "@twa-dev/sdk";
+import BigNumber from "bignumber.js";
 
 export const Homepage = () => {
     const pairs = useAppSelector(selectPairs);
@@ -35,6 +36,12 @@ export const Homepage = () => {
         pairs;
     }, [pairs.activePair, refetchCurrentPrice]);
 
+    const locked = new BigNumber(43055.2344);
+    const current = currentPrice.data.price
+        ? new BigNumber(currentPrice.data.price)
+        : null;
+    const difference = current ? current.minus(locked) : null;
+
     return (
         <div className={styles.homepage}>
             <div className={styles.selectionCharts}>
@@ -48,29 +55,51 @@ export const Homepage = () => {
                 </div>
             </div>
             <Card>
-                <div className={styles.liveMarket}>
+                <div className={styles.live}>
                     <h4>Market Live</h4>
-                    {currentPrice ? (
-                        <div>Latest Price: {currentPrice.data.price}</div>
+
+                    {current && difference ? (
+                        <div className={styles.last}>
+                            <h5>Last Price:</h5>
+                            <div className={styles.price}>
+                                <div>${current.toFormat(4)}</div>
+                                <div
+                                    className={
+                                        difference.gte(0)
+                                            ? styles.positive
+                                            : styles.negative
+                                    }>
+                                    ${difference.toFormat(4)}
+                                </div>
+                            </div>
+                        </div>
                     ) : (
-                        <div>Loading latest price...</div>
+                        <div>Loading...</div>
+                    )}
+
+                    {locked && (
+                        <div className={styles.locked}>
+                            <span>Locked price:</span> ${locked.toFormat(4)}
+                        </div>
                     )}
                 </div>
             </Card>
             <Card>
-                <div>
+                <div className={styles.side}>
                     <h4>Take Your Side</h4>
-                    <div className={styles.buttons}>
-                        <Button
-                            label="Enter UP"
-                            buttonType="upButton"
-                            onClick={handleUpClick}
-                        />
-                        <Button
-                            label="Enter DOWN"
-                            buttonType="downButton"
-                            onClick={handleDownClick}
-                        />
+                    <div className={styles.form}>
+                        <div className={styles.buttons}>
+                            <Button
+                                label="Enter UP"
+                                buttonType="upButton"
+                                onClick={handleUpClick}
+                            />
+                            <Button
+                                label="Enter DOWN"
+                                buttonType="downButton"
+                                onClick={handleDownClick}
+                            />
+                        </div>
                     </div>
                 </div>
             </Card>
