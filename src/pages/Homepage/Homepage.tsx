@@ -1,19 +1,23 @@
 import styles from "./Homepage.module.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { selectPairs } from "../../features/pairsSlice";
 import { useGetLatestPriceQuery } from "../../services/owlsApiSlice";
 import { skipToken } from "@reduxjs/toolkit/query/react";
+import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import WebApp from "@twa-dev/sdk";
 import BigNumber from "bignumber.js";
 import tonLogo from "../../assets/toncoin-ton-logo.svg";
+import { TradingViewChart } from "../../components/TradingView/TradingView";
 
 export const Homepage = () => {
     const pairs = useAppSelector(selectPairs);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleChartClick = () => WebApp.showAlert("Chart clicked");
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
     const handleUpClick = () => WebApp.showAlert("Up clicked");
     const handleDownClick = () => WebApp.showAlert("Down clicked");
 
@@ -54,7 +58,7 @@ export const Homepage = () => {
                 <div>
                     <Button
                         label={"Chart"}
-                        onClick={handleChartClick}
+                        onClick={openModal}
                         buttonType={"chartButton"}
                     />
                 </div>
@@ -154,6 +158,9 @@ export const Homepage = () => {
                     <div>Time till end: 03:26</div>
                 </div>
             </Card>
+            <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <TradingViewChart />
+            </Modal>
         </div>
     );
 };
