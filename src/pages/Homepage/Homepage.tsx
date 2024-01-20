@@ -8,6 +8,7 @@ import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import WebApp from "@twa-dev/sdk";
 import BigNumber from "bignumber.js";
+import tonLogo from "../../assets/toncoin-ton-logo.svg";
 
 export const Homepage = () => {
     const pairs = useAppSelector(selectPairs);
@@ -42,6 +43,9 @@ export const Homepage = () => {
             ? new BigNumber(currentPrice.data.price)
             : null;
     const difference = current ? current.minus(locked) : null;
+    const prizePool = new BigNumber(13.0476);
+    const payoutUp = 1.35;
+    const payoutDown = 3.36;
 
     return (
         <div className={styles.homepage}>
@@ -59,9 +63,9 @@ export const Homepage = () => {
                 <div className={styles.live}>
                     <h4>Market Live</h4>
 
-                    {current && difference ? (
-                        <div className={styles.last}>
-                            <h5>Last Price:</h5>
+                    <div className={styles.last}>
+                        <h5>Last Price:</h5>
+                        {current && difference ? (
                             <div className={styles.price}>
                                 <div>${current.toFormat(4)}</div>
                                 <div
@@ -73,10 +77,10 @@ export const Homepage = () => {
                                     ${difference.toFormat(4)}
                                 </div>
                             </div>
-                        </div>
-                    ) : (
-                        <div>Loading...</div>
-                    )}
+                        ) : (
+                            <div className={styles.last}>Loading...</div>
+                        )}
+                    </div>
 
                     {locked && (
                         <div className={styles.locked}>
@@ -89,17 +93,52 @@ export const Homepage = () => {
                 <div className={styles.side}>
                     <h4>Take Your Side</h4>
                     <div className={styles.form}>
+                        <div className={styles.inputPool}>
+                            <div className={styles.input}>
+                                <input type="text" placeholder="0.0" />
+                                <img
+                                    className={styles.tonLogo}
+                                    src={tonLogo}
+                                    alt="ton logo"
+                                />
+                            </div>
+                            <div className={styles.pool}>
+                                <h5>Prize Pool</h5>
+                                {prizePool ? (
+                                    <div className={styles.amount}>
+                                        {prizePool.toFormat(4)}
+                                        <img
+                                            className={styles.tonLogo}
+                                            src={tonLogo}
+                                            alt="ton logo"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div>Loading...</div>
+                                )}
+                            </div>
+                        </div>
                         <div className={styles.buttons}>
-                            <Button
-                                label="Enter UP"
-                                buttonType="upButton"
-                                onClick={handleUpClick}
-                            />
-                            <Button
-                                label="Enter DOWN"
-                                buttonType="downButton"
-                                onClick={handleDownClick}
-                            />
+                            <div className={styles.button}>
+                                <Button
+                                    label="Enter UP"
+                                    buttonType="upButton"
+                                    onClick={handleUpClick}
+                                />
+                                <div className={styles.payout}>
+                                    <span>Payout</span> {payoutUp}x
+                                </div>
+                            </div>
+                            <div className={styles.button}>
+                                <Button
+                                    label="Enter DOWN"
+                                    buttonType="downButton"
+                                    onClick={handleDownClick}
+                                />
+                                <div className={styles.payout}>
+                                    <span>Payout</span> {payoutDown}x
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
