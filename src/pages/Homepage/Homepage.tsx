@@ -37,9 +37,10 @@ export const Homepage = () => {
     }, [pairs.activePair, refetchCurrentPrice]);
 
     const locked = new BigNumber(43055.2344);
-    const current = currentPrice.data.price
-        ? new BigNumber(currentPrice.data.price)
-        : null;
+    const current =
+        currentPrice && currentPrice.data.price
+            ? new BigNumber(currentPrice.data.price)
+            : null;
     const difference = current ? current.minus(locked) : null;
 
     return (
