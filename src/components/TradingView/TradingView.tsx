@@ -1,40 +1,58 @@
-import React, { useRef, useEffect } from "react";
-import { ColorType, createChart } from "lightweight-charts";
+import React, { useEffect, useRef, memo } from "react";
 
-export const TradingViewChart: React.FC = () => {
-    const chartContainerRef = useRef<HTMLDivElement>(null);
+const TradingViewWidget: React.FC = () => {
+    const container = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (chartContainerRef.current) {
-            const chart = createChart(chartContainerRef.current, {
-                width: chartContainerRef.current.clientWidth,
-                height: 300,
-                layout: {
-                    background: { type: ColorType.Solid, color: "#ffffff" },
-                    textColor: "#333",
-                },
-                grid: {
-                    vertLines: {
-                        color: "#e1ecf1",
-                    },
-                    horzLines: {
-                        color: "#e1ecf1",
-                    },
-                },
-            });
+        const script = document.createElement("script");
+        script.src =
+            "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+        script.type = "text/javascript";
+        script.async = true;
+        script.innerHTML = JSON.stringify({
+            autosize: true,
+            symbol: "BINANCE:BTCUSDT",
+            interval: "D",
+            timezone: "Etc/UTC",
+            theme: "dark",
+            style: "2",
+            locale: "en",
+            enable_publishing: false,
+            backgroundColor: "rgba(0, 0, 0, 1)",
+            hide_top_toolbar: true,
+            hide_legend: true,
+            save_image: false,
+            hide_volume: true,
+            support_host: "https://www.tradingview.com",
+        });
 
-            const lineSeries = chart.addLineSeries();
-            lineSeries.setData([
-                { time: "2019-04-11", value: 80.01 },
-                { time: "2019-04-12", value: 96.63 },
-                // ... more data
-            ]);
-
-            return () => {
-                chart.remove();
-            };
+        if (container.current) {
+            container.current.appendChild(script);
         }
+
+        // Optional: Clean up the script when the component unmounts
+        return () => {
+            if (container.current) {
+                container.current.removeChild(script);
+            }
+        };
     }, []);
 
-    return <div ref={chartContainerRef} />;
+    return (
+        <div className="tradingview-widget-container" ref={container}>
+            <div className="tradingview-widget-container__widget"></div>
+            <div className="tradingview-widget-copyright">
+                <a
+                    href="https://www.tradingview.com/"
+                    rel="noopener noreferrer"
+                    target="_blank">
+                    <span className="blue-text">
+                        Track all markets on TradingView
+                    </span>
+                </a>
+            </div>
+        </div>
+    );
 };
+
+export default memo(TradingViewWidget);

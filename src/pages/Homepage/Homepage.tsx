@@ -10,7 +10,7 @@ import { Card } from "../../components/Card/Card";
 import WebApp from "@twa-dev/sdk";
 import BigNumber from "bignumber.js";
 import tonLogo from "../../assets/toncoin-ton-logo.svg";
-import { TradingViewChart } from "../../components/TradingView/TradingView";
+import TradingView from "../../components/TradingView/TradingView";
 
 export const Homepage = () => {
     const pairs = useAppSelector(selectPairs);
@@ -159,7 +159,7 @@ export const Homepage = () => {
                 </div>
             </Card>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <TradingViewChart />
+                <TradingView />
             </Modal>
         </div>
     );
