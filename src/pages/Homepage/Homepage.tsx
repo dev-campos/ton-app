@@ -11,8 +11,10 @@ import WebApp from "@twa-dev/sdk";
 import BigNumber from "bignumber.js";
 import tonLogo from "../../assets/toncoin-ton-logo.svg";
 import TradingView from "../../components/TradingView/TradingView";
+import { useCounterContract } from "../../hooks/useCounterContract";
 
 export const Homepage = () => {
+    const { value, address, sendIncrement } = useCounterContract();
     const pairs = useAppSelector(selectPairs);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -150,13 +152,33 @@ export const Homepage = () => {
             <Card>
                 <div className={styles.activePosition}>
                     <h4>Active Position</h4>
-                    <div>Direction: DOWN</div>
-                    <div>Locked Price: $43,055.2</div>
-                    <div>Amount: 10 TON</div>
-                    <div>Amount to win: 35.11 TON</div>
-                    <div>Current status: $14.0 LOSING</div>
-                    <div>Time till end: 03:26</div>
+                    <div className={styles.info}>
+                        <div>Direction: DOWN</div>
+                        <div>Locked Price: $43,055.2</div>
+                        <div>Amount: 10 TON</div>
+                        <div>Amount to win: 35.11 TON</div>
+                        <div>Current status: $14.0 LOSING</div>
+                        <div>Time till end: 03:26</div>
+                    </div>
                 </div>
+            </Card>
+            <Card>
+                <div>
+                    <b>Counter Address</b>
+                    <div>{address?.slice(0, 30) + "..."}</div>
+                </div>
+
+                <div>
+                    <b>Counter Value</b>
+                    <div>{value ?? "Loading..."}</div>
+                </div>
+
+                <a
+                    onClick={() => {
+                        sendIncrement();
+                    }}>
+                    Increment
+                </a>
             </Card>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <TradingView />
