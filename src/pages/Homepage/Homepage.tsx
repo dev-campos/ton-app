@@ -7,21 +7,26 @@ import { skipToken } from "@reduxjs/toolkit/query/react";
 import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
-import WebApp from "@twa-dev/sdk";
 import BigNumber from "bignumber.js";
 import tonLogo from "../../assets/toncoin-ton-logo.svg";
 import TradingView from "../../components/TradingView/TradingView";
-import { useCounterContract } from "../../hooks/useCounterContract";
+import { useOptionLedgerContract } from "../../hooks/useOptionLedgerContract";
+import { toNano } from "@ton/core";
 
 export const Homepage = () => {
-    const { value, address, sendIncrement } = useCounterContract();
+    const { value, address, sendPlaceCallOrder, sendPlacePutOrder } =
+        useOptionLedgerContract();
     const pairs = useAppSelector(selectPairs);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-    const handleUpClick = () => WebApp.showAlert("Up clicked");
-    const handleDownClick = () => WebApp.showAlert("Down clicked");
+    const handleUpClick = () => {
+        sendPlaceCallOrder(toNano(new BigNumber(0.01).toString()));
+    };
+    const handleDownClick = () => {
+        sendPlacePutOrder(toNano(new BigNumber(0.01).toString()));
+    };
 
     const { data: currentPrice, refetch: refetchCurrentPrice } =
         useGetLatestPriceQuery(
@@ -172,13 +177,6 @@ export const Homepage = () => {
                     <b>Counter Value</b>
                     <div>{value ?? "Loading..."}</div>
                 </div>
-
-                <a
-                    onClick={() => {
-                        sendIncrement();
-                    }}>
-                    Increment
-                </a>
             </Card>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <TradingView />

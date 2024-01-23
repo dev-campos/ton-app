@@ -5,22 +5,14 @@ import tonLogo from "../../../assets/toncoin-ton-logo.svg";
 import logo from "../../../assets/logo.svg";
 import { useGetAddressBalanceQuery } from "../../../services/tonApiSlice";
 import { skipToken } from "@reduxjs/toolkit/query/react";
-import { formatTons } from "../../../utils/nanotons";
 
 export const Header = () => {
     const address = useTonAddress();
 
     const { data: currentBalance, refetch: refetchCurrentBalance } =
-        useGetAddressBalanceQuery(
-            address
-                ? {
-                      address: address,
-                  }
-                : skipToken,
-            {
-                pollingInterval: 5000,
-            }
-        );
+        useGetAddressBalanceQuery(address ? address : skipToken, {
+            pollingInterval: 5000,
+        });
 
     useEffect(() => {
         if (address) {
@@ -31,7 +23,7 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <img className={styles.logo} src={logo} alt="Owls Logo" />
-            {address && currentBalance && currentBalance.result ? (
+            {address && currentBalance ? (
                 <div className={styles.ton}>
                     <TonConnectButton />
                     <div className={styles.balance}>
@@ -40,7 +32,7 @@ export const Header = () => {
                             src={tonLogo}
                             alt="ton logo"
                         />{" "}
-                        {formatTons(currentBalance.result).toFormat(2)}
+                        {currentBalance}
                     </div>
                 </div>
             ) : (
