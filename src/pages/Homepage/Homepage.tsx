@@ -18,9 +18,22 @@ export const Homepage = () => {
         useOptionLedgerContract();
     const pairs = useAppSelector(selectPairs);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [inputValue, setInputValue] = useState("");
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+
+    const handleInputChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ): void => {
+        const value = event.target.value;
+        const regex = /^\d*\.?\d{0,9}$/;
+
+        if (regex.test(value) || value === "") {
+            setInputValue(value);
+        }
+    };
+
     const handleUpClick = () => {
         sendPlaceCallOrder(toNano(new BigNumber(0.01).toString()));
     };
@@ -106,7 +119,12 @@ export const Homepage = () => {
                     <div className={styles.form}>
                         <div className={styles.inputPool}>
                             <div className={styles.input}>
-                                <input type="text" placeholder="0.0" />
+                                <input
+                                    type="text"
+                                    placeholder="0.0"
+                                    value={inputValue}
+                                    onChange={handleInputChange}
+                                />
                                 <img
                                     className={styles.tonLogo}
                                     src={tonLogo}
