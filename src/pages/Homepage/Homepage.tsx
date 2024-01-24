@@ -14,7 +14,7 @@ import { useOptionLedgerContract } from "../../hooks/useOptionLedgerContract";
 import { toNano } from "@ton/core";
 
 export const Homepage = () => {
-    const { value, address, sendPlaceCallOrder, sendPlacePutOrder } =
+    const { value, userId, address, sendPlaceCallOrder, sendPlacePutOrder } =
         useOptionLedgerContract();
     const pairs = useAppSelector(selectPairs);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -187,12 +187,17 @@ export const Homepage = () => {
             </Card>
             <Card>
                 <div>
-                    <b>Counter Address</b>
+                    <b>Dapp Address</b>
                     <div>{address?.slice(0, 30) + "..."}</div>
                 </div>
 
                 <div>
-                    <b>Counter Value</b>
+                    <b>User Id</b>
+                    <div>{userId ?? "Loading..."}</div>
+                </div>
+
+                <div>
+                    <b>Option Id</b>
                     <div>{value ?? "Loading..."}</div>
                 </div>
             </Card>

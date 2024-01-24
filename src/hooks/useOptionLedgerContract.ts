@@ -8,6 +8,7 @@ import { OptionLedger } from '../contracts/optionLedger';
 export function useOptionLedgerContract() {
     const client = useTonClient();
     const [val, setVal] = useState<null | number>();
+    const [userId, setUserId] = useState<null | number>()
     const { sender } = useTonConnect();
 
     const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
@@ -25,7 +26,9 @@ export function useOptionLedgerContract() {
             if (!optionLedgerContract) return;
             setVal(null);
             const val = await optionLedgerContract.getID();
+            const usr = await optionLedgerContract.getUserId()
             setVal(val);
+            setUserId(usr)
             await sleep(5000);
             getValue();
         }
@@ -34,6 +37,7 @@ export function useOptionLedgerContract() {
 
     return {
         value: val,
+        userId: userId,
         address: optionLedgerContract?.address.toString(),
         sendPlaceCallOrder: (amount: bigint) => {
             if (val) {
