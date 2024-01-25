@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import { RouterProvider } from "react-router-dom";
-import { THEME, TonConnectUIProvider } from "@tonconnect/ui-react";
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import Routes from "./Routes";
 import "./index.css";
 import WebApp from "@twa-dev/sdk";
@@ -15,7 +15,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Provider store={store}>
             <TonConnectUIProvider
                 manifestUrl="https://ton-app.vercel.app/tonconnect-manifest.json"
-                uiPreferences={{ theme: THEME.DARK }}
                 actionsConfiguration={{
                     twaReturnUrl: "https://t.me/campos_tonbot",
                 }}>

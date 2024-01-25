@@ -19,6 +19,20 @@
         font-size: 1rem;
     }
 
+    .positive, .negative {
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: white;
+    }
+
+    .positive {
+        background-color: #4CAF50;
+    }
+      
+    .negative {
+        background-color: #F44336;
+    }
+
     .live {
         .last {
             margin-bottom: 20px;
@@ -28,20 +42,6 @@
                 align-items: center;
                 justify-content: space-between;
                 max-width: 230px;
-            }
-        
-            .positive, .negative {
-                padding: 5px 10px;
-                border-radius: 5px;
-                color: white;
-            }
-        
-            .positive {
-                background-color: #4CAF50;
-            }
-              
-            .negative {
-                background-color: #F44336;
             }
         }
     
@@ -126,6 +126,23 @@
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .activePosition {
+        .info {
+            .yellow {
+                font-weight: bold;
+                color: #D4AF37;
+            }
+
+            .winning {
+                color: #4CAF50;
+            }
+
+            .losing {
+                color: #F44336;
             }
         }
     }

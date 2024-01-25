@@ -108,7 +108,7 @@ export const Homepage = () => {
 
                     {locked && (
                         <div className={styles.locked}>
-                            <span>Locked price:</span> ${locked.toFormat(4)}
+                            <span>Locked price</span> ${locked.toFormat(4)}
                         </div>
                     )}
                 </div>
@@ -176,12 +176,32 @@ export const Homepage = () => {
                 <div className={styles.activePosition}>
                     <h4>Active Position</h4>
                     <div className={styles.info}>
-                        <div>Direction: DOWN</div>
-                        <div>Locked Price: $43,055.2</div>
-                        <div>Amount: 10 TON</div>
-                        <div>Amount to win: 35.11 TON</div>
-                        <div>Current status: $14.0 LOSING</div>
-                        <div>Time till end: 03:26</div>
+                        <div>
+                            <span className={styles.yellow}>Direction</span>{" "}
+                            DOWN
+                        </div>
+                        <div>
+                            <span className={styles.yellow}>Locked Price</span>{" "}
+                            $43,055.2
+                        </div>
+                        <div>
+                            <span className={styles.yellow}>Amount</span> 10 TON
+                        </div>
+                        <div>
+                            <span className={styles.yellow}>Amount to win</span>{" "}
+                            35.11 TON
+                        </div>
+                        <div>
+                            <span className={styles.yellow}>
+                                Current status
+                            </span>{" "}
+                            <span className={styles.positive}>$14.0</span>{" "}
+                            <span className={styles.losing}>LOSING</span>
+                        </div>
+                        <div>
+                            <span className={styles.yellow}>Time till end</span>{" "}
+                            03:26
+                        </div>
                     </div>
                 </div>
             </Card>
