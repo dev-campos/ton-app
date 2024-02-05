@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <TonConnectUIProvider
                 manifestUrl="https://ton-app.vercel.app/tonconnect-manifest.json"
                 actionsConfiguration={{
-                    twaReturnUrl: "https://t.me/campos_tonbot",
+                    twaReturnUrl: "https://t.me/twinowls_bot",
                 }}>
                 <RouterProvider router={Routes} />
             </TonConnectUIProvider>

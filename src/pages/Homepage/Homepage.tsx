@@ -12,10 +12,12 @@ import tonLogo from "../../assets/toncoin-ton-logo.svg";
 import TradingView from "../../components/TradingView/TradingView";
 import { useOptionLedgerContract } from "../../hooks/useOptionLedgerContract";
 import { toNano } from "@ton/core";
+import WebApp from "@twa-dev/sdk";
 
 export const Homepage = () => {
     const { value, userId, address, sendPlaceCallOrder, sendPlacePutOrder } =
         useOptionLedgerContract();
+
     const pairs = useAppSelector(selectPairs);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [inputValue, setInputValue] = useState("");
@@ -73,6 +75,7 @@ export const Homepage = () => {
 
     return (
         <div className={styles.homepage}>
+            <p>{WebApp.initDataUnsafe.start_param}</p>
             <div className={styles.selectionCharts}>
                 <div>Market {pairs.activePair && pairs.activePair.name}</div>
                 <div>
