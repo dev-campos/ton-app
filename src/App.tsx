@@ -5,13 +5,13 @@ import { useAppDispatch } from "./hooks/reduxHooks";
 
 import { Outlet } from "react-router-dom";
 import Loader from "./components/Loader/Loader";
-import { useGetActivePairsQuery } from "./services/owlsApiSlice";
+import { useGetActiveAssetPairsQuery } from "./services/owlsApiSlice";
 import { changeActivePair, changePairs } from "./features/pairsSlice";
 
 function App() {
     const dispatch = useAppDispatch();
     const { data: pairsData, isLoading: pairsIsLoading } =
-        useGetActivePairsQuery(null);
+        useGetActiveAssetPairsQuery(null);
 
     useEffect(() => {
         if (pairsData) {

@@ -1,8 +1,4 @@
-export type ResponseType = {
-    success: boolean;
-    data: Latest;
-    error: string;
-};
+import { ResponseType } from '../response'
 
 export type Latest = {
     pair: string | null;
@@ -13,3 +9,5 @@ export type Latest = {
     created_On: string;
     modified_On: string;
 };
+
+export type LatestResponse = ResponseType<Latest>;

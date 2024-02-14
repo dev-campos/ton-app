@@ -1,6 +1,6 @@
-import { ResponseType } from './response'
+import { ResponseType } from "../response";
 
-export type Pair = {
+export type Active = {
     id: string;
     symbol: string;
     name: string;
@@ -12,6 +12,4 @@ export type Pair = {
     status: number;
 };
 
-export type PairResponse = ResponseType<Pair[]>;
-
-
+export type ActiveResponse = ResponseType<Active[]>;

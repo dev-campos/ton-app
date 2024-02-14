@@ -1,0 +1,18 @@
+.live {
+  .last {
+      margin-bottom: 20px;
+
+      .price {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          max-width: 230px;
+      }
+  }
+
+  .locked {
+      span {
+          color: #D4AF37;
+      }
+  }
+}
