@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ActiveOption.module.scss";
 import tonLogo from "../../assets/toncoin-ton-logo.svg";
 import BigNumber from "bignumber.js";
+import { format } from "date-fns";
 import { Button } from "../Button/Button";
 import { toNano } from "@ton/core";
 import { useOptionLedgerContract } from "../../hooks/useOptionLedgerContract";
@@ -14,7 +15,7 @@ interface ActiveOptionProps {
 export const ActiveOption: React.FC<ActiveOptionProps> = ({
     currentActiveLedger,
 }) => {
-    console.log(currentActiveLedger);
+    const [countdown, setCountdown] = useState<number>(0);
 
     const { sendPlaceCallOrder, sendPlacePutOrder } = useOptionLedgerContract();
 
@@ -46,6 +47,26 @@ export const ActiveOption: React.FC<ActiveOptionProps> = ({
         setInputValue("");
     };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const currentTime = new Date().getTime();
+            const expirationTime = new Date(
+                currentActiveLedger?.activeExpired || ""
+            ).getTime();
+            const remainingTime = Math.max(0, expirationTime - currentTime);
+
+            setCountdown(remainingTime);
+
+            if (remainingTime === 0) {
+                clearInterval(interval);
+            }
+        }, 1000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [currentActiveLedger]);
+
     const prizePool = new BigNumber(13.0476);
     const payoutUp = 1.35;
     const payoutDown = 3.36;
@@ -53,6 +74,13 @@ export const ActiveOption: React.FC<ActiveOptionProps> = ({
     return (
         <div className={styles.side}>
             <h4>Take Your Side</h4>
+
+            <div className={styles.countdown}>
+                <h5>Time Remaining</h5>
+                <div className={styles.time}>
+                    {countdown ? format(countdown, "HH:mm:ss") : "Loading..."}
+                </div>
+            </div>
             <div className={styles.form}>
                 <div className={styles.inputPool}>
                     <div className={styles.input}>
