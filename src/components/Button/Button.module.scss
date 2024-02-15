@@ -12,28 +12,30 @@
     &:last-child {
         margin-right: 0;
     }
+}
 
-  }
-
-  .chartButton {
+.chartButton {
+    color: white;
     border: solid 1px yellow;
     background-color: transparent;
     &:hover {
         color: black;
         background-color: yellow;
     }
-  }
-  
-  .upButton {
-    background-color: #4CAF50;
+}
+
+.upButton {
+    color: white;
+    background-color: #4caf50;
     &:hover {
-      background-color: darken(#4CAF50, 10%);
+        background-color: darken(#4caf50, 10%);
     }
-  }
-  
-  .downButton {
-    background-color: #F44336;
+}
+
+.downButton {
+    color: white;
+    background-color: #f44336;
     &:hover {
-      background-color: darken(#F44336, 10%);
+        background-color: darken(#f44336, 10%);
     }
-  }
+}

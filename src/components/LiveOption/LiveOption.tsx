@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./LiveOption.module.scss";
 import BigNumber from "bignumber.js";
 import { Live } from "../../types/optionsLedger/live";
-import { format } from "date-fns";
+import { formatMilliseconds } from "../../utils/formatMilliseconds";
 
 interface LiveOptionProps {
     currentPrice: BigNumber | null;
@@ -48,7 +48,7 @@ export const LiveOption: React.FC<LiveOptionProps> = ({
             <div className={styles.countdown}>
                 <h5>Time Remaining</h5>
                 <div className={styles.time}>
-                    {countdown ? format(countdown, "HH:mm:ss") : "Loading..."}
+                    {countdown ? formatMilliseconds(countdown) : "Loading..."}
                 </div>
             </div>
 
@@ -57,13 +57,7 @@ export const LiveOption: React.FC<LiveOptionProps> = ({
                 {currentPrice && difference ? (
                     <div className={styles.price}>
                         <div>${currentPrice.toFormat(4)}</div>
-                        <div
-                            className={
-                                typeof difference !== "undefined" &&
-                                difference.gte(0)
-                                    ? styles.positive
-                                    : styles.negative
-                            }>
+                        <div className={styles.positive}>
                             ${difference.toFormat(4)}
                         </div>
                     </div>

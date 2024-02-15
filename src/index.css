@@ -53,16 +53,3 @@ button:focus-visible {
   outline: 4px auto;
 }
 
-.positive, .negative {
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-}
-
-.positive {
-  background-color: #4CAF50;
-}
-
-.negative {
-  background-color: #F44336;
-}

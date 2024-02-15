@@ -3,21 +3,36 @@
         text-align: center;
         margin-bottom: 20px;
     }
-    
-  .last {
-      margin-bottom: 20px;
 
-      .price {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          max-width: 230px;
-      }
-  }
+    .last {
+        margin-bottom: 20px;
 
-  .locked {
-      span {
-          color: #D4AF37;
-      }
-  }
+        .price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 230px;
+        }
+
+        .positive,
+        .negative {
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .positive {
+            background-color: #4caf50;
+        }
+
+        .negative {
+            background-color: #f44336;
+        }
+    }
+
+    .locked {
+        span {
+            color: #d4af37;
+        }
+    }
 }

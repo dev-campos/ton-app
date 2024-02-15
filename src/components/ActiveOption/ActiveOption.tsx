@@ -7,6 +7,7 @@ import { Button } from "../Button/Button";
 import { toNano } from "@ton/core";
 import { useOptionLedgerContract } from "../../hooks/useOptionLedgerContract";
 import { Active } from "../../types/optionsLedger/active";
+import { formatMilliseconds } from "../../utils/formatMilliseconds";
 
 interface ActiveOptionProps {
     currentActiveLedger: Active | null;
@@ -78,7 +79,7 @@ export const ActiveOption: React.FC<ActiveOptionProps> = ({
             <div className={styles.countdown}>
                 <h5>Time Remaining</h5>
                 <div className={styles.time}>
-                    {countdown ? format(countdown, "HH:mm:ss") : "Loading..."}
+                    {countdown ? formatMilliseconds(countdown) : "Loading..."}
                 </div>
             </div>
             <div className={styles.form}>

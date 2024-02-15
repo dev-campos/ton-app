@@ -23,12 +23,13 @@ export const Homepage = () => {
     const pairs = useAppSelector(selectPairs);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    // TODO: Refactor this to use a real pair
     const { data: currentPrice, refetch: refetchCurrentPrice } =
         useGetLatestAssetPriceQuery(
             pairs.activePair
                 ? {
-                      baseAsset: pairs.activePair.baseAsset,
-                      quoteAsset: pairs.activePair.quotaAsset,
+                      BaseAsset: "BTC",
+                      QuoteAsset: "USDT",
                   }
                 : skipToken,
             {
