@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./ActiveOption.module.scss";
 import tonLogo from "../../assets/toncoin-ton-logo.svg";
 import BigNumber from "bignumber.js";
-import { format } from "date-fns";
 import { Button } from "../Button/Button";
 import { toNano } from "@ton/core";
 import { useOptionLedgerContract } from "../../hooks/useOptionLedgerContract";

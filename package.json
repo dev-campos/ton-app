@@ -20,7 +20,6 @@
     "@twa-dev/sdk": "^7.0.0",
     "@vitejs/plugin-basic-ssl": "^1.0.2",
     "bignumber.js": "^9.1.2",
-    "date-fns": "^3.3.1",
     "lightweight-charts": "^4.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
