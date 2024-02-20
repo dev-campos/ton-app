@@ -28,8 +28,8 @@ export const Homepage = () => {
         useGetLatestAssetPriceQuery(
             pairs.activePair
                 ? {
-                      BaseAsset: "BTC",
-                      QuoteAsset: "USDT",
+                      BaseAsset: pairs.activePair.baseAssetId,
+                      QuoteAsset: pairs.activePair.quoteAssetId,
                   }
                 : skipToken,
             {

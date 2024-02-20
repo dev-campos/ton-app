@@ -7,6 +7,9 @@ import { THEME, TonConnectUIProvider } from "@tonconnect/ui-react";
 import Routes from "./Routes";
 import "./index.css";
 import WebApp from "@twa-dev/sdk";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-42GW283TMT");
 
 WebApp.ready();
 

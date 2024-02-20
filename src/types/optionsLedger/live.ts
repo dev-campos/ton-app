@@ -10,7 +10,7 @@ export type Live = {
     assetPairId: string;
     networkV2Id: string;
     networkV2: string | null;
-    price: number;
+    strikePrice: number;
     paymentProceedBlockchainTxId: string | null;
     version: number;
     id: string;

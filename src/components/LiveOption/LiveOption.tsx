@@ -16,7 +16,7 @@ export const LiveOption: React.FC<LiveOptionProps> = ({
     const [countdown, setCountdown] = useState<number>(0);
 
     const locked = currentLiveLedger
-        ? new BigNumber(currentLiveLedger.price)
+        ? new BigNumber(currentLiveLedger.strikePrice)
         : null;
     const difference =
         currentPrice && locked ? currentPrice.minus(locked) : null;
