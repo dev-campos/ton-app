@@ -57,7 +57,12 @@ export const LiveOption: React.FC<LiveOptionProps> = ({
                 {currentPrice && difference ? (
                     <div className={styles.price}>
                         <div>${currentPrice.toFormat(4)}</div>
-                        <div className={styles.positive}>
+                        <div
+                            className={
+                                difference.gte(0)
+                                    ? styles.positive
+                                    : styles.negative
+                            }>
                             ${difference.toFormat(4)}
                         </div>
                     </div>
