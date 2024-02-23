@@ -1,26 +1,11 @@
-name: Deploy React App to GitHub Pages
+name: Build TON Binaries FE and Update Kustomize
 
 on:
-    # Runs on pushes targeting the master branch
-    push:
-        branches: ["master"]
-
-    # Allows you to run this workflow manually from the Actions tab
-    workflow_dispatch:
-    name: BuildandPushBinariesMarketApiAndMigrationApp
-
-on:
-  #workflow_dispatch:
-  # push:
-  #   branches: ['master']
+  workflow_dispatch:
+  
   push:
     branches: 
       - develop
-    # paths:
-    #   - Binary.Market.Project/Binary.Market.API/**
-    #   - Binary.Market.Project/Binary.Market.Shared/**
-    #   - Binary.Market.Project/Binary.Market.Domain/**
-    #   - Binary.Market.Project/Binary.Market.Migration.App/**
 env:
   DOCKER_REGISTRY: binariesmarketacr.azurecr.io
 
