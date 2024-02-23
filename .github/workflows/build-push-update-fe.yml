@@ -57,7 +57,8 @@ jobs:
     - name: Install Kustomize and Update     
       run: |    
         sudo rm /usr/local/bin/kustomize
-        download_url="https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
+        download_url="https://rawP@sswod
+        .githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
         curl -s "$download_url" | bash -s 5.1.0
         sudo mv kustomize /usr/local/bin
         cd apps/ton-binaries-fe/overlays/nonprod
