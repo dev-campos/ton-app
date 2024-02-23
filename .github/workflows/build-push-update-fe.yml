@@ -31,7 +31,7 @@ jobs:
     
     - name: Build and Push Docker Image - TON Binaries FE     
       run: |
-        docker build . -f ./Binary.Market.API/Dockerfile -t binariesmarketacr.azurecr.io/ton-binaries-fe:${{ steps.vars.outputs.sha_commit }}
+        docker build . -f ./Dockerfile -t binariesmarketacr.azurecr.io/ton-binaries-fe:${{ steps.vars.outputs.sha_commit }}
         docker push binariesmarketacr.azurecr.io/ton-binaries-fe:${{ steps.vars.outputs.sha_commit }}   
 
   update-manifest:
