@@ -62,7 +62,7 @@ jobs:
         curl -s "$download_url" | bash -s 5.1.0
         sudo mv kustomize /usr/local/bin
         cd apps/ton-binaries-fe/overlays/nonprod
-        kustomize edit set image binaries-fe-image=binariesmarketacr.azurecr.io/ton-binaries-fe:${{ steps.vars.outputs.sha_commit }}       
+        kustomize edit set image ton-binaries-fe-image=binariesmarketacr.azurecr.io/ton-binaries-fe:${{ steps.vars.outputs.sha_commit }}       
         
     - name: Commit Changes
       run: |
