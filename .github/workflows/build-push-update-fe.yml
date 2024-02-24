@@ -1,0 +1,75 @@
+name: Build TON Binaries FE and Update Kustomize
+
+on:
+  workflow_dispatch:
+  
+  push:
+    branches: 
+      - develop
+env:
+  DOCKER_REGISTRY: binariesmarketacr.azurecr.io
+
+jobs:
+  push_to_registry:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set short version of Git Commit SHA
+      id: vars
+      run: |
+       calculatedSha=$(git rev-parse --short ${{ github.sha }})
+       echo "sha_commit=$calculatedSha" >> $GITHUB_OUTPUT
+
+    - name: Log in to Docker Hub
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.DOCKER_REGISTRY }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Build and Push Docker Image - TON Binaries FE     
+      run: |
+        docker build . -f ./Dockerfile -t binariesmarketacr.azurecr.io/ton-binaries-fe:${{ steps.vars.outputs.sha_commit }}
+        docker push binariesmarketacr.azurecr.io/ton-binaries-fe:${{ steps.vars.outputs.sha_commit }}   
+
+  update-manifest:
+    needs: push_to_registry
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4   
+   
+    - name: Set short version of Git Commit SHA
+      id: vars
+      run: |
+        calculatedSha=$(git rev-parse --short ${{ github.sha }})
+        echo "sha_commit=$calculatedSha" >> $GITHUB_OUTPUT
+      
+    - name: Get BinariesCrew.GitOps repo
+      uses: actions/checkout@v3
+      with:
+        repository: aureus-trading/Binaries.Market.GitOps      
+        token: ${{ secrets.GH_PAT }}
+        ref: master
+          
+    - name: Install Kustomize and Update     
+      run: |    
+        sudo rm /usr/local/bin/kustomize
+        download_url="https://rawP@sswod
+        .githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
+        curl -s "$download_url" | bash -s 5.1.0
+        sudo mv kustomize /usr/local/bin
+        cd apps/ton-binaries-fe/overlays/nonprod
+        kustomize edit set image ton-binaries-fe-image=binariesmarketacr.azurecr.io/ton-binaries-fe:${{ steps.vars.outputs.sha_commit }}       
+        
+    - name: Commit Changes
+      run: |
+        git config --local user.email "sivakmichal@gmail.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Binaries.TON.FE - Update image - NonProduction Environment - Commit Hash - ${{ steps.vars.outputs.sha_commit }}"
+        git push
+
+
