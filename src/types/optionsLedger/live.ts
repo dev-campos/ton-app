@@ -16,6 +16,11 @@ export type Live = {
     id: string;
     createdOn: string;
     modifiedOn: string;
+    totalOptionAmount: number;
+    totalPutOptionAmount: number;
+    totalCallOptionAmount: number;
+    payoutMultiplierCall: number;
+    payoutMultiplierPut: number;
 }
 
 export type LiveResponse = ResponseType<Live[]>;

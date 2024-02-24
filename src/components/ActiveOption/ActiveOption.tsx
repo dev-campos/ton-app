@@ -67,9 +67,15 @@ export const ActiveOption: React.FC<ActiveOptionProps> = ({
         };
     }, [currentActiveLedger]);
 
-    const prizePool = new BigNumber(13.0476);
-    const payoutUp = 1.35;
-    const payoutDown = 3.36;
+    const prizePool = currentActiveLedger
+        ? new BigNumber(currentActiveLedger.totalOptionAmount)
+        : new BigNumber(0);
+    const payoutUp = currentActiveLedger
+        ? new BigNumber(currentActiveLedger.payoutMultiplierCall)
+        : new BigNumber(0);
+    const payoutDown = currentActiveLedger
+        ? new BigNumber(currentActiveLedger.payoutMultiplierPut)
+        : new BigNumber(0);
 
     return (
         <div className={styles.side}>
@@ -120,7 +126,7 @@ export const ActiveOption: React.FC<ActiveOptionProps> = ({
                             onClick={handleUpClick}
                         />
                         <div className={styles.payout}>
-                            <span>Payout</span> {payoutUp}x
+                            <span>Payout</span> {payoutUp.toFormat()}x
                         </div>
                     </div>
                     <div className={styles.button}>
@@ -130,7 +136,7 @@ export const ActiveOption: React.FC<ActiveOptionProps> = ({
                             onClick={handleDownClick}
                         />
                         <div className={styles.payout}>
-                            <span>Payout</span> {payoutDown}x
+                            <span>Payout</span> {payoutDown.toFormat()}x
                         </div>
                     </div>
                 </div>
