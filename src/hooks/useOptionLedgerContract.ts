@@ -8,7 +8,6 @@ import { OptionLedger } from '../contracts/optionLedger';
 export function useOptionLedgerContract() {
     const client = useTonClient();
     const [val, setVal] = useState<null | number>();
-    const [userId, setUserId] = useState<null | number>()
     const { sender } = useTonConnect();
 
     const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
@@ -16,7 +15,7 @@ export function useOptionLedgerContract() {
     const optionLedgerContract = useAsyncInitialize(async () => {
         if (!client) return;
         const contract = new OptionLedger(
-            Address.parse('EQDBgLzLKRxt1-EWwtmEcouV8K1YXtbv2qEf8nti28LCP-2q')
+            Address.parse('EQCXfXmIRHlrVZ4h9H3n9GLmayDo2C7tZjqrrbuM8jm6k-b3')
         );
         return client.open(contract) as OpenedContract<OptionLedger>;
     }, [client]);
@@ -26,9 +25,7 @@ export function useOptionLedgerContract() {
             if (!optionLedgerContract) return;
             setVal(null);
             const val = await optionLedgerContract.getID();
-            const usr = await optionLedgerContract.getUserId()
             setVal(val);
-            setUserId(usr)
             await sleep(5000);
             getValue();
         }
@@ -37,7 +34,6 @@ export function useOptionLedgerContract() {
 
     return {
         value: val,
-        userId: userId,
         address: optionLedgerContract?.address.toString(),
         sendPlaceCallOrder: (amount: bigint) => {
             if (val) {

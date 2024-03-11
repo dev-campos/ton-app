@@ -35,16 +35,16 @@ export const ActiveOption: React.FC<ActiveOptionProps> = ({
     const handleUpClick = () => {
         if (inputValue === "") {
             return;
+        } else {
+            sendPlaceCallOrder(toNano(new BigNumber(inputValue).toString()));
         }
-        sendPlaceCallOrder(toNano(new BigNumber(inputValue).toString()));
-        setInputValue("");
     };
     const handleDownClick = () => {
         if (inputValue === "") {
             return;
+        } else {
+            sendPlacePutOrder(toNano(new BigNumber(inputValue).toString()));
         }
-        sendPlacePutOrder(toNano(new BigNumber(inputValue).toString()));
-        setInputValue("");
     };
 
     useEffect(() => {
